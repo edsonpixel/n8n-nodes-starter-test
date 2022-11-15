@@ -22,12 +22,8 @@ export class HttpBinApi implements ICredentialType {
 			type: 'string',
 			default: 'https://httpbin.org',
 		},
-	];
 
-	// This allows the credential to be used by other parts of n8n
-	// stating how this credential is injected as part of the request
-	// An example is the Http Request node that can make generic calls
-	// reusing this credential
+	];
 	authenticate = {
 		type: 'generic',
 		properties: {
@@ -41,7 +37,10 @@ export class HttpBinApi implements ICredentialType {
 	test: ICredentialTestRequest = {
 		request: {
 			baseURL: '={{$credentials?.domain}}',
-			url: '/bearer',
+			url: '',
+			body:{
+				test: '={{$credentials?.token}}'
+			}
 		},
 	};
 }
